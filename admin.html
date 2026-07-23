@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dasbor Admin — Desa Kembang Sari</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,600;1,9..144,500&family=Inter:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <div class="brand">Kembang<span>Sari</span></div>
+    <div class="navlinks">
+      <a href="index.html">Beranda</a>
+      <a href="wisata.html">Wisata</a>
+      <a href="produk.html">Produk</a>
+      <a href="admin.html" class="aktif">Admin<span class="badge-admin">Dasbor</span></a>
+    </div>
+  </div>
+</nav>
+
+<header class="page-header">
+  <div class="wrap">
+    <p class="eyebrow">Dasbor Admin</p>
+    <h1>Data & Statistik Desa</h1>
+    <p>Unggah spreadsheet untuk menampilkan data desa sebagai grafik. Halaman ini hanya untuk pengelola — tidak ditautkan dari menu publik pengunjung.</p>
+  </div>
+</header>
+
+<section class="statistik" id="statistik">
+  <div class="wrap">
+
+    <div class="upload-box">
+      <div>
+        <div style="font-weight:600;color:var(--hijau-tua);">Unggah spreadsheet (.xlsx, .xls, atau .csv)</div>
+        <div class="ket">Kolom pertama dipakai sebagai label (mis. nama dusun/tahun), kolom kedua sebagai nilai (mis. jumlah penduduk/hasil panen).</div>
+      </div>
+      <div class="upload-controls">
+        <label class="file-label" for="file-input">Pilih File</label>
+        <input type="file" id="file-input" accept=".xlsx,.xls,.csv">
+        <span id="file-name">Belum ada file dipilih</span>
+      </div>
+    </div>
+    <div id="status-msg"></div>
+
+    <div class="chart-wrap">
+      <div class="chart-controls" id="chart-controls" style="display:none;">
+        <label>Jenis grafik:
+          <select id="chart-type">
+            <option value="bar">Batang</option>
+            <option value="line">Garis</option>
+            <option value="pie">Lingkaran</option>
+          </select>
+        </label>
+      </div>
+      <canvas id="data-chart" style="display:none;"></canvas>
+      <div class="chart-empty" id="chart-empty">Grafik akan muncul di sini setelah Anda mengunggah file spreadsheet.</div>
+    </div>
+  </div>
+</section>
+
+<div class="anyaman"></div>
+
+<footer id="kontak">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <h3>Desa Kembang Sari</h3>
+        <p>Kecamatan Girimulyo, Kabupaten Progo Asri<br>Jawa Tengah, Indonesia</p>
+      </div>
+      <div>
+        <h3>Kontak</h3>
+        <ul>
+          <li>Balai Desa: (0274) 555-0192</li>
+          <li>Pokdarwis: 0812-3456-7890</li>
+          <li>kembangsari.wisata@desa.id</li>
+        </ul>
+      </div>
+      <div>
+        <h3>Jam Kunjungan</h3>
+        <ul>
+          <li>Setiap hari, 06.00 – 17.00</li>
+          <li>Sanggar tenun: Sel–Min</li>
+          <li>Reservasi kelompok: H-3</li>
+        </ul>
+      </div>
+    </div>
+    <div class="bawah">
+      <span>© 2026 Desa Kembang Sari</span>
+      <span>Dikelola oleh Kelompok Sadar Wisata (Pokdarwis)</span>
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.4/chart.umd.min.js"></script>
+<script>
+(function(){
+  const fileInput = document.getElementById('file-input');
+  const fileName = document.getElementById('file-name');
+  const statusMsg = document.getElementById('status-msg');
+  const chartControls = document.getElementById('chart-controls');
+  const chartTypeSel = document.getElementById('chart-type');
+  const canvas = document.getElementById('data-chart');
+  const chartEmpty = document.getElementById('chart-empty');
+  let chartInstance = null;
+  let currentLabels = [];
+  let currentValues = [];
+  let currentTitle = 'Data';
+
+  const palette = ['#4c6b47','#d9a441','#6b4a34','#7a9b6e','#2b3a4a','#c98f34'];
+
+  fileInput.addEventListener('change', function(e){
+    const file = e.target.files[0];
+    if(!file) return;
+    fileName.textContent = file.name;
+    statusMsg.textContent = 'Memproses file...';
+
+    const reader = new FileReader();
+    reader.onload = function(evt){
+      try{
+        const data = new Uint8Array(evt.target.result);
+        const workbook = XLSX.read(data, {type:'array'});
+        const firstSheetName = workbook.SheetNames[0];
+        const sheet = workbook.Sheets[firstSheetName];
+        const rows = XLSX.utils.sheet_to_json(sheet, {header:1, defval:''});
+
+        if(!rows.length){
+          statusMsg.textContent = 'File kosong atau tidak terbaca.';
+          return;
+        }
+
+        let headerRow = rows[0];
+        let dataRows = rows.slice(1).filter(r => r.length && r[0] !== '');
+
+        currentTitle = (headerRow[1] || 'Nilai').toString();
+        currentLabels = dataRows.map(r => (r[0] ?? '').toString());
+        currentValues = dataRows.map(r => Number(r[1]) || 0);
+
+        if(!currentLabels.length){
+          statusMsg.textContent = 'Tidak ditemukan baris data pada kolom pertama dan kedua.';
+          return;
+        }
+
+        statusMsg.textContent = 'Berhasil memuat ' + currentLabels.length + ' baris dari sheet "' + firstSheetName + '".';
+        chartControls.style.display = 'flex';
+        canvas.style.display = 'block';
+        chartEmpty.style.display = 'none';
+        renderChart(chartTypeSel.value);
+      }catch(err){
+        console.error(err);
+        statusMsg.textContent = 'Gagal membaca file. Pastikan formatnya .xlsx, .xls, atau .csv.';
+      }
+    };
+    reader.readAsArrayBuffer(file);
+  });
+
+  chartTypeSel.addEventListener('change', function(){
+    if(currentLabels.length) renderChart(this.value);
+  });
+
+  function renderChart(type){
+    if(chartInstance) chartInstance.destroy();
+    const ctx = canvas.getContext('2d');
+    const isPie = type === 'pie';
+    chartInstance = new Chart(ctx, {
+      type: type,
+      data: {
+        labels: currentLabels,
+        datasets: [{
+          label: currentTitle,
+          data: currentValues,
+          backgroundColor: isPie ? palette : '#4c6b47',
+          borderColor: isPie ? '#fffaf0' : '#263b28',
+          borderWidth: isPie ? 2 : 0,
+          fill: type === 'line' ? false : true,
+          tension: 0.3
+        }]
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          legend: { display: isPie, labels: { color: '#2b3a4a' } },
+          title: { display: true, text: currentTitle, color: '#263b28', font: { family: "'Fraunces', serif", size: 15 } }
+        },
+        scales: isPie ? {} : {
+          x: { ticks: { color: '#2b3a4a' }, grid: { display:false } },
+          y: { ticks: { color: '#2b3a4a' }, beginAtZero:true }
+        }
+      }
+    });
+  }
+})();
+</script>
+</body>
+</html>
