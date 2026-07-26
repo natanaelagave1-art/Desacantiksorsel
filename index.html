@@ -3,112 +3,180 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Desa Kembang Sari — Permata di Kaki Bukit</title>
+<title>Desa Sudrofoyo — Portal Resmi Pemerintah Desa</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,600;1,9..144,500&family=Inter:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Spectral:wght@500;600;700&family=Public+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
 <nav>
   <div class="wrap">
-    <div class="brand">Kembang<span>Sari</span></div>
+    <div class="brand">
+      <div class="logo-slot">
+        <!-- Ganti "logo-desa.png" dengan logo asli Desa Sudrofoyo. Simpan
+             filenya satu folder dengan index.html. Selama file belum ada,
+             ikon lingkaran bawaan di bawah ini otomatis tampil sebagai ganti. -->
+        <img src="logo-desa.png" alt="Logo Desa Sudrofoyo" class="lambang-img"
+             onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+        <svg class="lambang-fallback" viewBox="0 0 44 44" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="22" cy="22" r="21" fill="#0e2033" stroke="#c69a2e" stroke-width="1.5"/>
+          <path d="M22 10 L22 24 M22 10 L17 16 M22 10 L27 16" stroke="#c69a2e" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M10 30 Q22 24 34 30" stroke="#3f6b4b" stroke-width="2" fill="none" stroke-linecap="round"/>
+          <path d="M10 34 Q22 29 34 34" stroke="#8a9aa8" stroke-width="1.4" fill="none" stroke-linecap="round"/>
+        </svg>
+      </div>
+      <div class="brand-text">
+        <div class="nama">Desa Sudrofoyo</div>
+        <div class="sub">Portal Resmi Pemerintah Desa</div>
+      </div>
+    </div>
     <div class="navlinks">
       <a href="index.html" class="aktif">Beranda</a>
-      <a href="wisata.html">Wisata</a>
-      <a href="produk.html">Produk</a>
-      <a href="admin.html">Admin</a>
+      <a href="profil.html">Profil Desa</a>
+      <a href="infografis.html">Infografis</a>
     </div>
   </div>
+  <div class="garis-resmi"><span class="g1"></span><span class="g2"></span><span class="g3"></span></div>
 </nav>
 
 <header class="hero">
   <div class="wrap">
     <div class="hero-grid">
       <div>
-        <p class="eyebrow">Desa Wisata · Kabupaten Girimulyo</p>
-        <h1>Desa Kembang Sari,<br>permata hijau di kaki bukit.</h1>
-        <p class="lede">Sawah berundak, sungai jernih, dan tangan-tangan penenun yang menjaga tradisi tetap hidup — sejak turun-temurun, di antara kabut pagi dan aroma tanah basah.</p>
-        <div class="hero-cta">
-          <a href="wisata.html" class="btn btn-primary">Jelajahi Wisata</a>
-          <a href="#kontak" class="btn btn-ghost">Rencanakan Kunjungan</a>
-        </div>
+        <p class="eyebrow">Pemerintah Desa Sudrofoyo</p>
+        <h1>Data dan informasi desa, terbuka untuk warga.</h1>
+        <p class="lede">Dasbor ini menampilkan data kependudukan, pendidikan, potensi komoditas, dan perkembangan ekonomi Desa Sudrofoyo secara ringkas dan terkini.</p>
       </div>
-      <div>
-        <svg class="terraces" viewBox="0 0 400 340" xmlns="http://www.w3.org/2000/svg">
-          <circle cx="300" cy="70" r="46" fill="#d9a441" opacity="0.85"/>
-          <path d="M0 200 L400 200 L400 240 L0 240 Z" fill="#7a9b6e"/>
-          <path d="M0 240 L400 240 L400 268 L0 268 Z" fill="#6a8c5f"/>
-          <path d="M0 268 L400 268 L400 296 L0 296 Z" fill="#587a4e"/>
-          <path d="M0 296 L400 296 L400 340 L0 340 Z" fill="#4c6b47"/>
-          <path d="M0 200 Q 200 160 400 200" fill="none" stroke="#f4efdf" stroke-width="3" opacity="0.5"/>
-          <path d="M0 240 Q 200 205 400 240" fill="none" stroke="#f4efdf" stroke-width="3" opacity="0.5"/>
-          <path d="M0 268 Q 200 238 400 268" fill="none" stroke="#f4efdf" stroke-width="3" opacity="0.5"/>
-          <path d="M60 50 Q140 -20 220 50 L220 100 L60 100 Z" fill="#263b28" opacity="0.75"/>
-          <path d="M180 70 Q260 10 360 70 L360 110 L180 110 Z" fill="#263b28" opacity="0.55"/>
+      <div class="hero-emblem-slot">
+        <!-- Ganti "logo-desa.png" dengan logo asli Desa Sudrofoyo (file yang
+             sama dengan slot logo di navbar). Selama file belum ada, ilustrasi
+             lingkaran bawaan di bawah ini otomatis tampil sebagai ganti. -->
+        <img src="logo-desa.png" alt="Logo Desa Sudrofoyo" class="hero-emblem-img"
+             onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+        <svg class="hero-emblem-fallback" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="100" cy="100" r="92" fill="none" stroke="#c69a2e" stroke-width="2"/>
+          <circle cx="100" cy="100" r="78" fill="none" stroke="#3f6b4b" stroke-width="1" opacity="0.6"/>
+          <path d="M100 40 L100 110 M100 40 L78 66 M100 40 L122 66" stroke="#c69a2e" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M40 140 Q100 118 160 140" stroke="#3f6b4b" stroke-width="4" fill="none" stroke-linecap="round"/>
+          <path d="M40 155 Q100 134 160 155" stroke="#6f8a9e" stroke-width="2.5" fill="none" stroke-linecap="round"/>
         </svg>
       </div>
     </div>
   </div>
-  <div class="anyaman"></div>
 </header>
 
-<div class="stats">
+<div class="quickfacts">
   <div class="wrap">
-    <div class="stat"><b>412</b><span>Hektar sawah berundak</span></div>
-    <div class="stat"><b>1.180</b><span>Warga desa</span></div>
-    <div class="stat"><b>36</b><span>Perajin tenun aktif</span></div>
-    <div class="stat"><b>820 mdpl</b><span>Ketinggian desa</span></div>
+    <div class="qf"><b id="qf-penduduk">4.235</b><span>Jumlah Penduduk</span></div>
+    <div class="qf"><b id="qf-kk">1.180</b><span>Jumlah KK</span></div>
+    <div class="qf"><b id="qf-dusun">8</b><span>Dusun</span></div>
+    <div class="qf"><b id="qf-luas">612 Ha</b><span>Luas Wilayah</span></div>
   </div>
 </div>
 
-<section id="tentang">
+<section id="dasbor">
   <div class="wrap">
-    <div class="tentang-grid">
-      <div>
-        <p class="eyebrow">Tentang Desa</p>
-        <h2>Desa yang tumbuh bersama sawahnya</h2>
+    <div class="section-head">
+      <p class="eyebrow">Dasbor Data Desa</p>
+      <h2>Ringkasan data terkini</h2>
+      <p>Grafik di bawah diambil otomatis dari Google Sheets yang dikelola perangkat desa. Selama Sheets belum disambungkan, sistem menampilkan data contoh.</p>
+    </div>
+
+    <div class="dasbor-grid">
+
+      <div class="chart-card">
+        <div class="chart-card-head">
+          <h3>Demografi Penduduk</h3>
+          <span class="chart-status" id="status-demografi">Memuat data…</span>
+        </div>
+        <div class="chart-canvas-wrap"><canvas id="chart-demografi"></canvas></div>
+        <p class="chart-note">Perbandingan jumlah penduduk berdasarkan jenis kelamin.</p>
       </div>
-      <div>
-        <p>Kembang Sari berdiri di lereng bukit sejak tiga abad lalu, dikelilingi sawah berundak yang mengikuti kontur tanah. Air dari mata air Cikembang mengalir lewat saluran subak yang masih dijaga bergiliran oleh warga hingga hari ini.</p>
-        <p>Selain bertani, sebagian besar keluarga di desa ini menenun kain lurik dan menganyam bambu — keterampilan yang diturunkan dari ibu ke anak, dan kini menjadi salah satu alasan wisatawan datang berkunjung.</p>
+
+      <div class="chart-card">
+        <div class="chart-card-head">
+          <h3>Tingkat Pendidikan</h3>
+          <span class="chart-status" id="status-pendidikan">Memuat data…</span>
+        </div>
+        <div class="chart-canvas-wrap"><canvas id="chart-pendidikan"></canvas></div>
+        <p class="chart-note">Jumlah warga berdasarkan jenjang pendidikan terakhir.</p>
       </div>
+
+      <div class="chart-card">
+        <div class="chart-card-head">
+          <h3>Potensi Komoditas</h3>
+          <span class="chart-status" id="status-komoditas">Memuat data…</span>
+        </div>
+        <div class="chart-canvas-wrap"><canvas id="chart-komoditas"></canvas></div>
+        <p class="chart-note">Proporsi luas lahan menurut jenis komoditas unggulan (%).</p>
+      </div>
+
+      <div class="chart-card">
+        <div class="chart-card-head">
+          <h3>PDRB / Ekonomi Desa</h3>
+          <span class="chart-status" id="status-pdrb">Memuat data…</span>
+        </div>
+        <div class="chart-canvas-wrap"><canvas id="chart-pdrb"></canvas></div>
+        <p class="chart-note">Pertumbuhan PDRB desa lima tahun terakhir (miliar rupiah).</p>
+      </div>
+
     </div>
   </div>
 </section>
-
-<div class="anyaman"></div>
 
 <footer id="kontak">
   <div class="wrap">
     <div class="footer-grid">
       <div>
-        <h3>Desa Kembang Sari</h3>
-        <p>Kecamatan Girimulyo, Kabupaten Progo Asri<br>Jawa Tengah, Indonesia</p>
+        <h3>Desa Sudrofoyo</h3>
+        <p>Kantor Kepala Desa Sudrofoyo<br>Kecamatan Wonoasri, Kabupaten Sumberjaya<br>Jawa Timur, Indonesia</p>
       </div>
       <div>
         <h3>Kontak</h3>
         <ul>
-          <li>Balai Desa: (0274) 555-0192</li>
-          <li>Pokdarwis: 0812-3456-7890</li>
-          <li>kembangsari.wisata@desa.id</li>
+          <li>Kantor Desa: (0341) 555-0173</li>
+          <li>WhatsApp Layanan: 0812-3456-7890</li>
+          <li>desasudrofoyo@kemendesa.go.id</li>
         </ul>
       </div>
       <div>
-        <h3>Jam Kunjungan</h3>
+        <h3>Jam Pelayanan</h3>
         <ul>
-          <li>Setiap hari, 06.00 – 17.00</li>
-          <li>Sanggar tenun: Sel–Min</li>
-          <li>Reservasi kelompok: H-3</li>
+          <li>Senin – Jumat, 08.00 – 15.00</li>
+          <li>Sabtu, Minggu: Libur</li>
+          <li>Layanan darurat: 24 jam</li>
         </ul>
       </div>
     </div>
     <div class="bawah">
-      <span>© 2026 Desa Kembang Sari</span>
-      <span>Dikelola oleh Kelompok Sadar Wisata (Pokdarwis)</span>
+      <span>© 2026 Pemerintah Desa Sudrofoyo</span>
+      <span>Dikelola oleh Perangkat Desa & Kader Digital Desa</span>
     </div>
   </div>
 </footer>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.4/chart.umd.min.js"></script>
+<script src="script.js"></script>
+<script>
+(async function () {
+  const { data: dataRingkasan } = await ambilDataSheet(CONFIG.RINGKASAN_SOURCE, "ringkasan");
+  isiRingkasan(dataRingkasan);
+
+  const rencana = [
+    { key: "demografi", canvas: "chart-demografi", status: "status-demografi", tipe: "doughnut", label: "Jiwa" },
+    { key: "pendidikan", canvas: "chart-pendidikan", status: "status-pendidikan", tipe: "bar", label: "Jiwa" },
+    { key: "komoditas", canvas: "chart-komoditas", status: "status-komoditas", tipe: "pie", label: "%" },
+    { key: "pdrb", canvas: "chart-pdrb", status: "status-pdrb", tipe: "line", label: "Miliar Rp" },
+  ];
+
+  for (const item of rencana) {
+    const { data, sumber } = await ambilDataSheet(CONFIG.CHART_SOURCES[item.key], item.key);
+    buatChart(item.canvas, item.tipe, data, { label: item.label });
+    setStatusBadge(item.status, sumber);
+  }
+})();
+</script>
 </body>
 </html>

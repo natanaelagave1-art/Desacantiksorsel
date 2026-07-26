@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Galeri Infografis — Desa Sudrofoyo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Spectral:wght@500;600;700&family=Public+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <div class="brand">
+      <div class="logo-slot">
+        <img src="logo-desa.png" alt="Logo Desa Sudrofoyo" class="lambang-img"
+             onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+        <svg class="lambang-fallback" viewBox="0 0 44 44" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="22" cy="22" r="21" fill="#0e2033" stroke="#c69a2e" stroke-width="1.5"/>
+          <path d="M22 10 L22 24 M22 10 L17 16 M22 10 L27 16" stroke="#c69a2e" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M10 30 Q22 24 34 30" stroke="#3f6b4b" stroke-width="2" fill="none" stroke-linecap="round"/>
+          <path d="M10 34 Q22 29 34 34" stroke="#8a9aa8" stroke-width="1.4" fill="none" stroke-linecap="round"/>
+        </svg>
+      </div>
+      <div class="brand-text">
+        <div class="nama">Desa Sudrofoyo</div>
+        <div class="sub">Portal Resmi Pemerintah Desa</div>
+      </div>
+    </div>
+    <div class="navlinks">
+      <a href="index.html">Beranda</a>
+      <a href="profil.html">Profil Desa</a>
+      <a href="infografis.html" class="aktif">Infografis</a>
+    </div>
+  </div>
+  <div class="garis-resmi"><span class="g1"></span><span class="g2"></span><span class="g3"></span></div>
+</nav>
+
+<header class="page-header">
+  <div class="wrap">
+    <p class="eyebrow">Galeri Infografis</p>
+    <h1>Poster & infografis desa</h1>
+    <p>Kumpulan infografis resmi desa — laporan capaian, peta wilayah, alur layanan, hingga data kesehatan. Galeri ini bertambah otomatis begitu data baru ditambahkan ke Google Sheets, tanpa perlu mengubah kode.</p>
+  </div>
+</header>
+
+<section id="galeri">
+  <div class="wrap">
+    <div class="galeri-toolbar">
+      <label style="font-size:0.88rem;color:var(--teks-muted);">
+        Filter kategori:
+        <select id="filter-kategori">
+          <option value="semua">Semua Kategori</option>
+        </select>
+      </label>
+    </div>
+    <div id="galeri-status">Memuat data infografis…</div>
+    <div class="galeri-grid" id="galeri-grid"></div>
+  </div>
+</section>
+
+<div class="lightbox" id="lightbox">
+  <span class="tutup" id="lightbox-tutup">&times;</span>
+  <div>
+    <img id="lightbox-img" src="" alt="">
+    <p class="caption" id="lightbox-caption"></p>
+  </div>
+</div>
+
+<footer id="kontak">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <h3>Desa Sudrofoyo</h3>
+        <p>Kantor Kepala Desa Sudrofoyo<br>Kecamatan Wonoasri, Kabupaten Sumberjaya<br>Jawa Timur, Indonesia</p>
+      </div>
+      <div>
+        <h3>Kontak</h3>
+        <ul>
+          <li>Kantor Desa: (0341) 555-0173</li>
+          <li>WhatsApp Layanan: 0812-3456-7890</li>
+          <li>desasudrofoyo@kemendesa.go.id</li>
+        </ul>
+      </div>
+      <div>
+        <h3>Jam Pelayanan</h3>
+        <ul>
+          <li>Senin – Jumat, 08.00 – 15.00</li>
+          <li>Sabtu, Minggu: Libur</li>
+          <li>Layanan darurat: 24 jam</li>
+        </ul>
+      </div>
+    </div>
+    <div class="bawah">
+      <span>© 2026 Pemerintah Desa Sudrofoyo</span>
+      <span>Dikelola oleh Perangkat Desa & Kader Digital Desa</span>
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
+<script src="script.js"></script>
+<script>
+(async function () {
+  const grid = document.getElementById("galeri-grid");
+  const statusEl = document.getElementById("galeri-status");
+  const filterEl = document.getElementById("filter-kategori");
+  const lightbox = document.getElementById("lightbox");
+  const lightboxImg = document.getElementById("lightbox-img");
+  const lightboxCaption = document.getElementById("lightbox-caption");
+
+  const { data, sumber } = await ambilDataSheet(CONFIG.INFOGRAFIS_SOURCE, "infografis");
+
+  statusEl.textContent =
+    sumber === "sheets"
+      ? `● Menampilkan ${data.length} infografis dari Google Sheets.`
+      : `○ Menampilkan ${data.length} infografis contoh (Google Sheets belum disambungkan).`;
+
+  // Isi opsi filter kategori otomatis dari data
+  const kategoriUnik = [...new Set(data.map((d) => d.Kategori).filter(Boolean))];
+  kategoriUnik.forEach((k) => {
+    const opt = document.createElement("option");
+    opt.value = k;
+    opt.textContent = k;
+    filterEl.appendChild(opt);
+  });
+
+  function renderGaleri(list) {
+    grid.innerHTML = "";
+    if (!list.length) {
+      grid.innerHTML = '<div class="galeri-empty">Belum ada infografis pada kategori ini.</div>';
+      return;
+    }
+    list.forEach((item) => {
+      const card = document.createElement("div");
+      card.className = "kartu-infografis";
+      card.innerHTML = `
+        <img class="thumb" src="${item.URL_Gambar}" alt="${item.Judul}" loading="lazy">
+        <div class="info">
+          <div class="kategori">${item.Kategori || "Umum"}</div>
+          <h3>${item.Judul}</h3>
+        </div>
+      `;
+      card.addEventListener("click", () => {
+        lightboxImg.src = item.URL_Gambar;
+        lightboxImg.alt = item.Judul;
+        lightboxCaption.textContent = item.Judul;
+        lightbox.classList.add("aktif");
+      });
+      grid.appendChild(card);
+    });
+  }
+
+  renderGaleri(data);
+
+  filterEl.addEventListener("change", () => {
+    const v = filterEl.value;
+    renderGaleri(v === "semua" ? data : data.filter((d) => d.Kategori === v));
+  });
+
+  document.getElementById("lightbox-tutup").addEventListener("click", () => {
+    lightbox.classList.remove("aktif");
+  });
+  lightbox.addEventListener("click", (e) => {
+    if (e.target === lightbox) lightbox.classList.remove("aktif");
+  });
+})();
+</script>
+</body>
+</html>
