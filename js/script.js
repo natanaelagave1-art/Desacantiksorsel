@@ -16,13 +16,13 @@
 
 const CONFIG = {
   CHART_SOURCES: {
-    demografi: "https://docs.google.com/spreadsheets/d/1fLmzvHwY7wI286tHh8-rueGgj2R20ul43KdsVtk4DFE/export?format=csv&gid=591267247",
-    pendidikan: "https://docs.google.com/spreadsheets/d/1_frakQdOkcBDWDno0pWYe1940k2TgpKfbcJFKCifsXI/export?format=csv&gid=0",
-    komoditas: "https://docs.google.com/spreadsheets/d/1f5OE_4IIV-3M4B4eHXIKOlJ6GGjrosH16yF0cWSEhCU/export?format=csv&gid=24863216",
-    pdrb: "https://docs.google.com/spreadsheets/d/1ujvfmkzepleT7unznZvOPGcvly3t_B1iop0DIJbmubU/export?format=csv&gid=0",
+    demografi: "https://docs.google.com/spreadsheets/d/1fLmzvHwY7wI286tHh8-rueGgj2R20ul43KdsVtk4DFE/gviz/tq?tqx=out:csv&gid=591267247",
+    pendidikan: "https://docs.google.com/spreadsheets/d/1_frakQdOkcBDWDno0pWYe1940k2TgpKfbcJFKCifsXI/gviz/tq?tqx=out:csv&gid=0",
+    komoditas: "https://docs.google.com/spreadsheets/d/1f5OE_4IIV-3M4B4eHXIKOlJ6GGjrosH16yF0cWSEhCU/gviz/tq?tqx=out:csv&gid=24863216",
+    pdrb: "https://docs.google.com/spreadsheets/d/1ujvfmkzepleT7unznZvOPGcvly3t_B1iop0DIJbmubU/gviz/tq?tqx=out:csv&gid=0",
   },
-  INFOGRAFIS_SOURCE: "https://docs.google.com/spreadsheets/d/188wsQ3xpld4bNLa0WgNc6lrgGvF_PK5vdYNOn8cQU-o/export?format=csv&gid=908468724",
-  RINGKASAN_SOURCE: "https://docs.google.com/spreadsheets/d/1qygnjYvr1ibs4YHQnPCfwBr1cIxK9M6cfGn_TGvqRaQ/export?format=csv&gid=0",
+  INFOGRAFIS_SOURCE: "https://docs.google.com/spreadsheets/d/188wsQ3xpld4bNLa0WgNc6lrgGvF_PK5vdYNOn8cQU-o/gviz/tq?tqx=out:csv&gid=908468724",
+  RINGKASAN_SOURCE: "https://docs.google.com/spreadsheets/d/1qygnjYvr1ibs4YHQnPCfwBr1cIxK9M6cfGn_TGvqRaQ/gviz/tq?tqx=out:csv&gid=0",
 };
 
 /* Palet warna resmi — dipakai konsisten di semua grafik */
@@ -175,24 +175,3 @@ function setStatusBadge(elId, sumber) {
     el.textContent = "○ Data cadangan (contoh)";
   }
 }
-
-const map = L.map('map').setView([-1.261654, 131.989948], 13);
-
-// OpenStreetMap tiles
-L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    maxZoom: 19,
-    attribution: '&copy; OpenStreetMap contributors'
-}).addTo(map);
-
-// Add marker
-L.marker([-1.261654, 131.989948])
-.addTo(map)
-.bindPopup('<b>Hello!</b><br>Lokasi Kampung Sudrofoyo')
-.openPopup();
-
-// Add polygon
-L.polygon([
-    [-0.875, 131.25],
-    [-0.880, 131.26],
-    [-0.870, 131.27]
-]).addTo(map);
