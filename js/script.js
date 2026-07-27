@@ -175,3 +175,24 @@ function setStatusBadge(elId, sumber) {
     el.textContent = "○ Data cadangan (contoh)";
   }
 }
+
+const map = L.map('map').setView([-1.261654, 131.989948], 13);
+
+// OpenStreetMap tiles
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    maxZoom: 19,
+    attribution: '&copy; OpenStreetMap contributors'
+}).addTo(map);
+
+// Add marker
+L.marker([-1.261654, 131.989948])
+.addTo(map)
+.bindPopup('<b>Hello!</b><br>Lokasi Kampung Sudrofoyo')
+.openPopup();
+
+// Add polygon
+L.polygon([
+    [-0.875, 131.25],
+    [-0.880, 131.26],
+    [-0.870, 131.27]
+]).addTo(map);

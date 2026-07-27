@@ -6,7 +6,8 @@
 <title>Profil Desa — Desa Sudrofoyo</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Spectral:wght@500;600;700&family=Public+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="styles/style.css">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
 </head>
 <body>
 
@@ -14,7 +15,7 @@
   <div class="wrap">
     <div class="brand">
       <div class="logo-slot">
-        <img src="logo-desa.png" alt="Logo Desa Sudrofoyo" class="lambang-img"
+        <img src="assets/logo-kab-sorsel.png" alt="Logo Desa Sudrofoyo" class="lambang-img"
              onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
         <svg class="lambang-fallback" viewBox="0 0 44 44" xmlns="http://www.w3.org/2000/svg">
           <circle cx="22" cy="22" r="21" fill="#0e2033" stroke="#c69a2e" stroke-width="1.5"/>
@@ -132,10 +133,10 @@
       File "peta-wilayah.png" ditaruh satu folder dengan profil.html
       (satu folder dengan index.html, style.css, dst).
     -->
-    <img src="peta-wilayah.png" alt="Peta wilayah Desa Sudrofoyo"
+    <!-- <img src="peta-wilayah.png" alt="Peta wilayah Desa Sudrofoyo"
          style="width:100%;border:1px solid var(--garis);display:block;"
-         onerror="this.style.display='none'; document.getElementById('peta-kosong').style.display='flex';">
-    <div id="peta-kosong" style="display:none;height:280px;border:1px dashed var(--garis);align-items:center;justify-content:center;text-align:center;color:var(--teks-muted);font-size:0.88rem;padding:20px;">
+         onerror="this.style.display='none'; document.getElementById('peta-kosong').style.display='flex';"> -->
+    <div id="map" style="height:280px;border:1px dashed var(--garis);align-items:center;justify-content:center;text-align:center;color:var(--teks-muted);font-size:0.88rem;padding:20px;">
       Gambar peta wilayah belum ditambahkan.<br>Simpan file "peta-wilayah.png" di folder yang sama dengan halaman ini.
     </div>
     <p style="margin-top:14px;font-size:0.88rem;color:var(--teks-muted);">
@@ -176,5 +177,7 @@
   </div>
 </footer>
 
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="js/script.js"></script>
 </body>
 </html>
