@@ -16,13 +16,13 @@
 
 const CONFIG = {
   CHART_SOURCES: {
-    demografi: "https://docs.google.com/spreadsheets/d/1fLmzvHwY7wI286tHh8-rueGgj2R20ul43KdsVtk4DFE/gviz/tq?tqx=out:csv&gid=591267247",
+    demografi: "https://docs.google.com/spreadsheets/d/11xIcGgczdC21ZZobepYXk1BKyvE83O34dCzOc5wnufg/gviz/tq?tqx=out:csv&gid=591267247",
     pendidikan: "https://docs.google.com/spreadsheets/d/1_frakQdOkcBDWDno0pWYe1940k2TgpKfbcJFKCifsXI/gviz/tq?tqx=out:csv&gid=0",
     komoditas: "https://docs.google.com/spreadsheets/d/1f5OE_4IIV-3M4B4eHXIKOlJ6GGjrosH16yF0cWSEhCU/gviz/tq?tqx=out:csv&gid=24863216",
     pdrb: "https://docs.google.com/spreadsheets/d/1ujvfmkzepleT7unznZvOPGcvly3t_B1iop0DIJbmubU/gviz/tq?tqx=out:csv&gid=0",
   },
-  INFOGRAFIS_SOURCE: "https://docs.google.com/spreadsheets/d/188wsQ3xpld4bNLa0WgNc6lrgGvF_PK5vdYNOn8cQU-o/gviz/tq?tqx=out:csv&gid=908468724",
-  RINGKASAN_SOURCE: "https://docs.google.com/spreadsheets/d/1qygnjYvr1ibs4YHQnPCfwBr1cIxK9M6cfGn_TGvqRaQ/gviz/tq?tqx=out:csv&gid=0",
+  INFOGRAFIS_SOURCE: "https://docs.google.com/spreadsheets/d/16NNRqU1_OSzClx7TICdKcjNxRsmidmO-tejaGKZfXRk/gviz/tq?tqx=out:csv&gid=908468724",
+  RINGKASAN_SOURCE: "https://docs.google.com/spreadsheets/d/1-VV2WkcBn_7wulrLH1GES6kaeHIDRMDZT8lY4GT9zio/gviz/tq?tqx=out:csv&gid=0",
 };
 
 /* Palet warna resmi — dipakai konsisten di semua grafik */
